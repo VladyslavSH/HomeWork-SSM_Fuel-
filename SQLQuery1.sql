@@ -21,7 +21,7 @@ create table FuelForFueling(
 	Fuel_id int not null,
 	foreign key (Fueling_id) references Fueling(id),
 	foreign key (Fuel_id) references Fuel(id),
-	PriceOfLiter decimal not null
+	PriceOfLiter decimal(18,2) not null
 );
 
 create table Workers(
@@ -43,14 +43,18 @@ create table Orders(
 	Workers_id int not null,
 	Fuel_id int not null,
 	QuantityFuelSale decimal not null,
-	TotalSum decimal not null,
-	[Date] datetime not null
+	[Date] datetime not null,
+	foreign key(Fueling_id) references Fueling(id),
+	foreign key(Workers_id) references Workers(id),
+	foreign key(Fuel_id) references Fuel(id)
 );
 ------- Changed ---------
+drop database aFueling;
 drop table Fueling;
 drop table Fuel;
 drop table Workers;
 drop table FuelForFueling;
+drop table Orders;
 
 -------- insert ------------
 insert into Fueling(NameFueling, City, [Address])values 
@@ -58,14 +62,26 @@ insert into Fueling(NameFueling, City, [Address])values
 	('Dizel', 'Dnepr', 'Mudrena 73'),
 	('Oko', 'Kiev', 'Pushkina 18');
 
-insert into Fuel(MarkaFuel, PriceOfLiter, CurrentQuantityFuel) values
-	('95', 25.50, 1000),
-	('97', 28.30, 1350),
-	('98', 22.50, 1935),
-	('75', 30.20, 850);
+insert into Fuel(MarkaFuel, CurrentQuantityFuel) values
+	('95', 1000),
+	('97', 1350),
+	('98', 1935),
+	('75', 850);
 
 insert into Workers(NameWorker, LastNameWorker, Position, Birthday, E_mail, PhoneNumber, MoreInfo, Fueling_id) values
-	()
+	('Borya', 'Moiseev', 'Refueler', '12-20-1965','','','',1),
+	('Fedia', 'Zhelezni', 'Refueler', '12-20-1985','','','',2),
+	('Grisha', 'Lodrich', 'Refueler', '12-15-1932','','','',3);
+
+insert into FuelForFueling(Fueling_id, Fuel_id, PriceOfLiter)values
+	(1,1, 20.50),
+	(1,2, 25.50),
+	(1,3, 18.50),
+	(2,4, 21.30),
+	(2,3, 22.80),
+	(2,2, 19.00),
+	(3,1, 22.80),
+	(3,4, 28.50);
 -------- select ----------
 select * from Fuel;
 select * from Fueling;
