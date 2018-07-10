@@ -16,7 +16,7 @@ namespace WindowsFormsApp1
         SqlCommand command = null;
         SqlDataReader sqlDataReader = null;
         List<string> list = null;
-        string conn = @"Data Source = DESKTOP-OUHKHRN\SQLEXPRESS; Initial Catalog = aFueling; Integrated Security = true;";
+        string conn = @"Data Source = COMP409\SQLEXPRESS; Initial Catalog = aFueling; Integrated Security = true;";
 
         public Form1()
         {
@@ -25,7 +25,6 @@ namespace WindowsFormsApp1
             InitialComboBoxWorker();
             InitialComboBoxFuel();
             list = new List<string>();
-            
         }
         
         private SqlConnection Connect()
@@ -73,20 +72,23 @@ namespace WindowsFormsApp1
 
         private void InitialComboBoxFuel()
         {
-            SqlConnection connection = Connect();
+            SqlConnection connection = this.Connect();
             command = new SqlCommand("select * from Fuel;", connection);
             sqlDataReader = command.ExecuteReader();
             while (sqlDataReader.Read())
             {
                 comboBox3.Items.Add($"{sqlDataReader["MarkaFuel"]} ");
-                comboBox3.Items.Add($"{sqlDataReader["MarkaFuel"]} ");
-                comboBox3.Items.Add($"{sqlDataReader["MarkaFuel"]} ");
-                comboBox3.Items.Add($"{sqlDataReader["MarkaFuel"]} ");
-                comboBox3.Items.Add($"{sqlDataReader["MarkaFuel"]} ");
-                comboBox3.Items.Add($"{sqlDataReader["MarkaFuel"]} ");
-                comboBox3.Items.Add($"{sqlDataReader["MarkaFuel"]} ");
             }
-           
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            SqlConnection connection = this.Connect();
+            command = new SqlCommand("select Workers.NameWorker from Workers, Fueling where Fueling.id = Workers.Fueling_id and Fueling.NameFueling = 'Oko';", connection);
+            while (sqlDataReader.Read())
+            {
+                comboBox2.Items.Add($"'{NameWorker}'  '{LastNameWorker}'");
+            }
         }
     }
 }

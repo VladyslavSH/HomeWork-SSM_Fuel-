@@ -60,7 +60,7 @@ drop table Orders;
 insert into Fueling(NameFueling, City, [Address])values 
 	('Oko', 'Kryvoi Rog', 'Kosmonavtov 50'),
 	('Dizel', 'Dnepr', 'Mudrena 73'),
-	('Oko', 'Kiev', 'Pushkina 18');
+	('OilZap', 'Kiev', 'Pushkina 18');
 
 insert into Fuel(MarkaFuel, CurrentQuantityFuel) values
 	('95', 1000),
@@ -83,7 +83,14 @@ insert into FuelForFueling(Fueling_id, Fuel_id, PriceOfLiter)values
 	(3,1, 22.80),
 	(3,4, 28.50);
 -------- select ----------
-select * from Fueling;  
+select * from Fueling ;  
 select * from Fuel;
 select * from Workers;
 select * from FuelForFueling;
+select 
+Workers.NameWorker 
+from Workers, Fueling 
+where
+Fueling.id = Workers.Fueling_id
+and
+Fueling.NameFueling = 'Oko';
