@@ -83,7 +83,7 @@ insert into FuelForFueling(Fueling_id, Fuel_id, PriceOfLiter)values
 	(3,1, 22.80),
 	(3,4, 28.50);
 -------- select ----------
+select * from Fueling;  
 select * from Fuel;
-select * from Fueling;
 select * from Workers;
 select * from FuelForFueling;

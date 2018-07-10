@@ -13,10 +13,10 @@ namespace WindowsFormsApp1
 {
     public partial class Form1 : Form
     {
-        SqlConnection connection = null;
         SqlCommand command = null;
         SqlDataReader sqlDataReader = null;
-        List<string> list = null; 
+        List<string> list = null;
+        string conn = @"Data Source = DESKTOP-OUHKHRN\SQLEXPRESS; Initial Catalog = aFueling; Integrated Security = true;";
 
         public Form1()
         {
@@ -24,35 +24,69 @@ namespace WindowsFormsApp1
             InitialComboBoxFueling();
             InitialComboBoxWorker();
             InitialComboBoxFuel();
-            connection = new SqlConnection(@"Data Source = COMP409\SQLEXPRESS; Initial Catalog = aFueling; Integrated Security = true;");
-            command = new SqlCommand();
             list = new List<string>();
+            
+        }
+        
+        private SqlConnection Connect()
+        {
+            SqlConnection connection = new SqlConnection(this.conn);
             try
             {
                 connection.Open();
+                return connection;
             }
             catch (Exception e)
             {
                 MessageBox.Show(e.Message);
             }
-            finally {
-                connection?.Close();
-            }
+            return null;
         }
 
         private void InitialComboBoxFueling()
         {
-            throw new NotImplementedException();
+           SqlConnection connection = this.Connect();
+           if(connection != null)
+            {
+                comboBox2.Items.Clear();
+                command = new SqlCommand("select * from Fueling;", connection);
+                sqlDataReader = command.ExecuteReader();
+                while (sqlDataReader.Read())
+                {
+                    comboBox1.Items.Add($"{sqlDataReader["NameFueling"]} | {sqlDataReader["City"]}");
+                }
+            }
         }
 
         private void InitialComboBoxWorker()
         {
-            throw new NotImplementedException();
+            SqlConnection connection = this.Connect();
+            comboBox2.Items.Clear();
+            command = new SqlCommand("select * from Workers;", connection);
+            sqlDataReader = command.ExecuteReader();
+            while (sqlDataReader.Read())
+            {
+                comboBox2.Items.Add($"{sqlDataReader["NameWorker"]} | {sqlDataReader["LastNameWorker"]}");
+            }
+            
         }
 
         private void InitialComboBoxFuel()
         {
-            throw new NotImplementedException();
+            SqlConnection connection = Connect();
+            command = new SqlCommand("select * from Fuel;", connection);
+            sqlDataReader = command.ExecuteReader();
+            while (sqlDataReader.Read())
+            {
+                comboBox3.Items.Add($"{sqlDataReader["MarkaFuel"]} ");
+                comboBox3.Items.Add($"{sqlDataReader["MarkaFuel"]} ");
+                comboBox3.Items.Add($"{sqlDataReader["MarkaFuel"]} ");
+                comboBox3.Items.Add($"{sqlDataReader["MarkaFuel"]} ");
+                comboBox3.Items.Add($"{sqlDataReader["MarkaFuel"]} ");
+                comboBox3.Items.Add($"{sqlDataReader["MarkaFuel"]} ");
+                comboBox3.Items.Add($"{sqlDataReader["MarkaFuel"]} ");
+            }
+           
         }
     }
 }
