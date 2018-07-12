@@ -16,7 +16,7 @@ namespace WindowsFormsApp1
         SqlCommand command = null;
         SqlDataReader sqlDataReader = null;
         List<string> list = null;
-        string conn = @"Data Source = COMP203\SQLEXPRESS; Initial Catalog = aFueling; Integrated Security = true;";
+        string conn = @"Data Source = COMP409\SQLEXPRESS; Initial Catalog = aFueling; Integrated Security = true;";
 
         public Form1()
         {
@@ -100,6 +100,22 @@ namespace WindowsFormsApp1
             while (sqlDataReader.Read())
             {
                 comboBox3.Items.Add($"{sqlDataReader["MarkaFuel"]}");
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            SqlConnection connection = this.Connect();
+            command = new SqlCommand($"select Workers.NameWorker, Workers.LastNameWorker from Workers, Fueling where Fueling.id = Workers.Fueling_id and Fueling.NameFueling = '{comboBox1.Text}';", connection);
+            sqlDataReader = command.ExecuteReader();
+            if (comboBox1.Text != string.Empty && comboBox2.Text != string.Empty && comboBox3.Text != string.Empty)
+            {
+                
             }
         }
     }

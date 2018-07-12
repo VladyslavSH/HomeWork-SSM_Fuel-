@@ -102,3 +102,13 @@ and
 Fuel.id = fff.Fuel_id
 and
 Fueling.NameFueling = 'Oko';
+
+select Fueling.NameFueling, Workers.NameWorker, Workers.LastNameWorker, Fuel.MarkaFuel
+from Fueling, Workers, Fuel, FuelForFueling
+where 
+Fueling.id = Workers.Fueling_id
+and
+Fuel.id = FuelForFueling.Fuel_id
+and
+Fueling.id = FuelForFueling.Fueling_id
+go

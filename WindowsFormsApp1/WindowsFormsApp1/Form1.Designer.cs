@@ -52,6 +52,7 @@
             this.button1.TabIndex = 0;
             this.button1.Text = "+";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // comboBox1
             // 
@@ -115,6 +116,7 @@
             this.button4.TabIndex = 7;
             this.button4.Text = "Покупка";
             this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // label1
             // 
