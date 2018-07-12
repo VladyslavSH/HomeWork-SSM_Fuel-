@@ -88,9 +88,17 @@ select * from Fuel;
 select * from Workers;
 select * from FuelForFueling;
 select 
-Workers.NameWorker 
+Workers.NameWorker, Workers.LastNameWorker
 from Workers, Fueling 
 where
 Fueling.id = Workers.Fueling_id
+and
+Fueling.NameFueling = 'Oko';
+select  Fuel.MarkaFuel
+from FuelForFueling fff, Fueling, Fuel
+where
+Fueling.id = fff.Fueling_id
+and
+Fuel.id = fff.Fuel_id
 and
 Fueling.NameFueling = 'Oko';
