@@ -43,7 +43,7 @@ create table Orders(
 	Workers_id int not null,
 	Fuel_id int not null,
 	QuantityFuelSale decimal not null,
-	[Date] datetime not null,
+	[Date] datetime null,
 	foreign key(Fueling_id) references Fueling(id),
 	foreign key(Workers_id) references Workers(id),
 	foreign key(Fuel_id) references Fuel(id)
@@ -103,12 +103,14 @@ Fuel.id = fff.Fuel_id
 and
 Fueling.NameFueling = 'Oko';
 
-select Fueling.NameFueling, Workers.NameWorker, Workers.LastNameWorker, Fuel.MarkaFuel
-from Fueling, Workers, Fuel, FuelForFueling
+select FuelForFueling.PriceOfLiter
+from Fueling, Fuel, FuelForFueling
 where 
-Fueling.id = Workers.Fueling_id
-and
 Fuel.id = FuelForFueling.Fuel_id
 and
 Fueling.id = FuelForFueling.Fueling_id
+and
+Fuel.MarkaFuel = '95'
+and
+Fueling.NameFueling = 'Oko'
 go
